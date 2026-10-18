@@ -31,7 +31,7 @@ void clicker_loop() {
         return;
     }
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
 }
 
 void clicker_worker() {
@@ -52,7 +52,7 @@ int main() {
 
     while (keep_running) {
         bool current_toggle_pressed =
-            CGEventSourceKeyState(kCGEventSourceStateHIDSystemState, kVK_ANSI_S);
+            CGEventSourceKeyState(kCGEventSourceStateHIDSystemState, kVK_ANSI_Grave);
         if (!previous_toggle_pressed && current_toggle_pressed) {
             is_clicking = is_clicking ^ 1;
         }
@@ -66,7 +66,7 @@ int main() {
         previous_toggle_pressed = current_toggle_pressed;
         previous_escape_pressed = current_escape_pressed;
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        // std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
     worker.join();
 
